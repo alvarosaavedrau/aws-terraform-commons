@@ -15,8 +15,8 @@ resource "aws_eip" "publicB" {
 }
 
 resource "aws_nat_gateway" "publicA" {
-  subnet_id = aws_subnet.publicA.id
-  allocation_id = aws_eip.publicA.id
+  subnet_id         = aws_subnet.publicA.id
+  allocation_id     = aws_eip.publicA.id
   connectivity_type = "public"
 
   tags = {
@@ -26,8 +26,8 @@ resource "aws_nat_gateway" "publicA" {
 }
 
 resource "aws_nat_gateway" "publicB" {
-  subnet_id = aws_subnet.publicB.id
-  allocation_id = aws_eip.publicB.id
+  subnet_id         = aws_subnet.publicB.id
+  allocation_id     = aws_eip.publicB.id
   connectivity_type = "public"
 
   tags = {
