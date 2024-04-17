@@ -5,7 +5,7 @@ resource "aws_key_pair" "personal" {
 
 resource "aws_instance" "public" {
   instance_type = var.instance_type
-  ami           = data.aws_ami.ubuntu.id
+  ami           = data.aws_ami.amzn-linux-2023-ami.id
   subnet_id     = aws_subnet.publicA.id
 
   key_name = aws_key_pair.personal.key_name
@@ -19,7 +19,7 @@ resource "aws_instance" "public" {
 
 resource "aws_instance" "private" {
   instance_type = var.instance_type
-  ami           = data.aws_ami.ubuntu.id
+  ami           = data.aws_ami.amzn-linux-2023-ami.id
   subnet_id     = aws_subnet.privateA.id
 
   vpc_security_group_ids = [aws_security_group.main.id]
