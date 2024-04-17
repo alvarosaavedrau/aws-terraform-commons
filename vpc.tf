@@ -3,7 +3,7 @@ resource "aws_vpc" "dev" {
   instance_tenancy = "default"
 
   tags = {
-    Name = "vpc-sysops"
+    Name = "vpc-${var.name}"
   }
 }
 
@@ -14,7 +14,7 @@ resource "aws_subnet" "publicA" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "subnet-sysops-publicA"
+    Name = "subnet-${var.name}-publicA"
   }
 
   depends_on = [aws_vpc.dev]
@@ -28,7 +28,7 @@ resource "aws_subnet" "publicB" {
   map_public_ip_on_launch = true
 
   tags = {
-    Name = "subnet-sysops-publicB"
+    Name = "subnet-${var.name}-publicB"
   }
 
   depends_on = [aws_subnet.publicA]
@@ -42,7 +42,7 @@ resource "aws_subnet" "privateA" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "subnet-sysops-privateA"
+    Name = "subnet-${var.name}-privateA"
   }
 
   depends_on = [aws_subnet.publicB]
@@ -56,7 +56,7 @@ resource "aws_subnet" "privateB" {
   map_public_ip_on_launch = false
 
   tags = {
-    Name = "subnet-sysops-privateB"
+    Name = "subnet-${var.name}-privateB"
   }
 
   depends_on = [aws_subnet.privateA]

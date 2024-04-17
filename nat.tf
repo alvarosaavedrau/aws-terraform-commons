@@ -1,7 +1,7 @@
 resource "aws_eip" "publicA" {
 
   tags = {
-    Name = "eip-sysops-publicA"
+    Name = "eip-${var.name}-publicA"
   }
 
 }
@@ -9,7 +9,7 @@ resource "aws_eip" "publicA" {
 resource "aws_eip" "publicB" {
 
   tags = {
-    Name = "eip-sysops-publicB"
+    Name = "eip-${var.name}-publicB"
   }
 
 }
@@ -20,7 +20,7 @@ resource "aws_nat_gateway" "publicA" {
   connectivity_type = "public"
 
   tags = {
-    Name = "nat-gateway-sysops-publicA"
+    Name = "nat-gateway-${var.name}-publicA"
   }
 
 }
@@ -31,7 +31,7 @@ resource "aws_nat_gateway" "publicB" {
   connectivity_type = "public"
 
   tags = {
-    Name = "nat-gateway-sysops-publicB"
+    Name = "nat-gateway-${var.name}-publicB"
   }
 
 }

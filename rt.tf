@@ -7,7 +7,7 @@ resource "aws_route_table" "private" {
   }
 
   tags = {
-    "Name" = "route-table-sysops-private"
+    "Name" = "route-table-${var.name}-private"
   }
 }
 
@@ -15,7 +15,7 @@ resource "aws_route_table" "public" {
   vpc_id = aws_vpc.dev.id
 
   tags = {
-    "Name" = "route-table-sysops-public"
+    "Name" = "route-table-${var.name}-public"
   }
 }
 

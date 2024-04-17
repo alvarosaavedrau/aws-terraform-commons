@@ -1,5 +1,5 @@
 resource "aws_security_group" "main" {
-  name   = "my-sg-sysops-public"
+  name   = "my-sg-${var.name}-public"
   vpc_id = aws_vpc.dev.id
   ingress {
     from_port   = 22
@@ -17,7 +17,7 @@ resource "aws_security_group" "main" {
 }
 
 resource "aws_security_group" "private" {
-  name        = "my-sg-sysops-private"
+  name        = "my-sg-${var.name}-private"
   vpc_id      = aws_vpc.dev.id
   description = "Allow SSH from bastion host"
   ingress {
