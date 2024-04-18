@@ -10,6 +10,11 @@ variable "region" {
   type = string
 }
 
+variable "personal_account_id" {
+  type        = list(string)
+  description = "List of personal account IDs to deny terraform create"
+}
+
 variable "public_key_path" {
   type        = string
   description = "Path to the public key to create the key pair"
