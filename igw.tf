@@ -1,7 +1,10 @@
 resource "aws_internet_gateway" "dev" {
   vpc_id = aws_vpc.dev.id
 
-  tags = {
-    "Name" = "igw-${var.name}"
-  }
+  tags = merge(
+    var.custom_tags,
+    {
+      "Name" = "igw-${var.name}",
+    }
+  )
 }

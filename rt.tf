@@ -6,17 +6,23 @@ resource "aws_route_table" "private" {
     nat_gateway_id = aws_nat_gateway.publicA.id
   }
 
-  tags = {
-    "Name" = "route-table-${var.name}-private"
-  }
+  tags = merge(
+    var.custom_tags,
+    {
+      Name = "route-table-${var.name}-private"
+    }
+  )
 }
 
 resource "aws_route_table" "public" {
   vpc_id = aws_vpc.dev.id
 
-  tags = {
-    "Name" = "route-table-${var.name}-public"
-  }
+  tags = merge(
+    var.custom_tags,
+    {
+      Name = "route-table-${var.name}-public"
+    }
+  )
 }
 
 resource "aws_route_table_association" "privateA" {
@@ -39,7 +45,6 @@ resource "aws_route_table_association" "publicB" {
   route_table_id = aws_route_table.public.id
 }
 
-// create a route to the internet gateway
 resource "aws_route" "public_internet_gateway" {
   route_table_id         = aws_route_table.public.id
   destination_cidr_block = "0.0.0.0/0"

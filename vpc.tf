@@ -2,9 +2,12 @@ resource "aws_vpc" "dev" {
   cidr_block       = "10.0.0.0/16"
   instance_tenancy = "default"
 
-  tags = {
-    Name = "vpc-${var.name}"
-  }
+  tags = merge(
+    var.custom_tags,
+    {
+      Name = "vpc-${var.name}"
+    }
+  )
 }
 
 resource "aws_subnet" "publicA" {
@@ -13,12 +16,14 @@ resource "aws_subnet" "publicA" {
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = true
 
-  tags = {
-    Name = "subnet-${var.name}-publicA"
-  }
+  tags = merge(
+    var.custom_tags,
+    {
+      Name = "subnet-${var.name}-publicA"
+    }
+  )
 
   depends_on = [aws_vpc.dev]
-
 }
 
 resource "aws_subnet" "publicB" {
@@ -27,12 +32,14 @@ resource "aws_subnet" "publicB" {
   availability_zone       = "us-east-1b"
   map_public_ip_on_launch = true
 
-  tags = {
-    Name = "subnet-${var.name}-publicB"
-  }
+  tags = merge(
+    var.custom_tags,
+    {
+      Name = "subnet-${var.name}-publicB"
+    }
+  )
 
   depends_on = [aws_subnet.publicA]
-
 }
 
 resource "aws_subnet" "privateA" {
@@ -41,12 +48,14 @@ resource "aws_subnet" "privateA" {
   availability_zone       = "us-east-1a"
   map_public_ip_on_launch = false
 
-  tags = {
-    Name = "subnet-${var.name}-privateA"
-  }
+  tags = merge(
+    var.custom_tags,
+    {
+      Name = "subnet-${var.name}-privateA"
+    }
+  )
 
   depends_on = [aws_subnet.publicB]
-
 }
 
 resource "aws_subnet" "privateB" {
@@ -55,10 +64,12 @@ resource "aws_subnet" "privateB" {
   availability_zone       = "us-east-1b"
   map_public_ip_on_launch = false
 
-  tags = {
-    Name = "subnet-${var.name}-privateB"
-  }
+  tags = merge(
+    var.custom_tags,
+    {
+      Name = "subnet-${var.name}-privateB"
+    }
+  )
 
   depends_on = [aws_subnet.privateA]
-
 }
