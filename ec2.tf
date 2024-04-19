@@ -3,7 +3,7 @@ resource "aws_key_pair" "personal" {
   public_key = file(var.public_key_path)
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       "Name" = "keypair-${var.name}",
     }
@@ -19,7 +19,7 @@ resource "aws_instance" "public" {
 
   vpc_security_group_ids = [aws_security_group.main.id]
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       "Name" = "ec2-${var.name}-bastion-public-subnetA",
     }
@@ -34,7 +34,7 @@ resource "aws_instance" "private" {
   vpc_security_group_ids = [aws_security_group.main.id]
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       "Name" = "ec2-${var.name}-private-subnetA",
     }

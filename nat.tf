@@ -1,7 +1,7 @@
 resource "aws_eip" "publicA" {
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "eip-${var.name}-publicA"
     }
@@ -11,7 +11,7 @@ resource "aws_eip" "publicA" {
 resource "aws_eip" "publicB" {
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "eip-${var.name}-publicB"
     }
@@ -24,7 +24,7 @@ resource "aws_nat_gateway" "publicA" {
   connectivity_type = "public"
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "nat-gateway-${var.name}-publicA"
     }
@@ -37,7 +37,7 @@ resource "aws_nat_gateway" "publicB" {
   connectivity_type = "public"
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "nat-gateway-${var.name}-publicB"
     }

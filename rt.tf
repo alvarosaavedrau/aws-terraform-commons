@@ -7,7 +7,7 @@ resource "aws_route_table" "private" {
   }
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "route-table-${var.name}-private"
     }
@@ -18,7 +18,7 @@ resource "aws_route_table" "public" {
   vpc_id = aws_vpc.dev.id
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "route-table-${var.name}-public"
     }

@@ -30,7 +30,7 @@ variable "name" {
   type = string
 }
 
-variable "custom_tags" {
+variable "common_tags" {
   description = "Common tags to the resources"
   type        = map(string)
 }

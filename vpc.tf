@@ -3,7 +3,7 @@ resource "aws_vpc" "dev" {
   instance_tenancy = "default"
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "vpc-${var.name}"
     }
@@ -17,7 +17,7 @@ resource "aws_subnet" "publicA" {
   map_public_ip_on_launch = true
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "subnet-${var.name}-publicA"
     }
@@ -33,7 +33,7 @@ resource "aws_subnet" "publicB" {
   map_public_ip_on_launch = true
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "subnet-${var.name}-publicB"
     }
@@ -49,7 +49,7 @@ resource "aws_subnet" "privateA" {
   map_public_ip_on_launch = false
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "subnet-${var.name}-privateA"
     }
@@ -65,7 +65,7 @@ resource "aws_subnet" "privateB" {
   map_public_ip_on_launch = false
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "subnet-${var.name}-privateB"
     }

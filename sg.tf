@@ -16,7 +16,7 @@ resource "aws_security_group" "main" {
   }
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "sg-${var.name}-bastion-public"
     }
@@ -42,7 +42,7 @@ resource "aws_security_group" "private" {
   }
 
   tags = merge(
-    var.custom_tags,
+    var.common_tags,
     {
       Name = "sg-${var.name}-private"
     }
