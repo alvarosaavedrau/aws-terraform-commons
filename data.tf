@@ -7,3 +7,7 @@ data "aws_ami" "amzn-linux-2023-ami" {
     values = ["al2023-ami-2023.*-x86_64"]
   }
 }
+
+data "http" "myip" {
+  url = "https://ipv4.icanhazip.com"
+}
