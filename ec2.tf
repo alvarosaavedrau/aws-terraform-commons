@@ -31,7 +31,9 @@ resource "aws_instance" "private" {
   ami           = data.aws_ami.amzn-linux-2023-ami.id
   subnet_id     = aws_subnet.privateA.id
 
-  vpc_security_group_ids = [aws_security_group.main.id]
+  key_name = aws_key_pair.personal.key_name
+
+  vpc_security_group_ids = [aws_security_group.private.id]
 
   tags = merge(
     var.common_tags,
