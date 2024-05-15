@@ -17,7 +17,7 @@ resource "aws_instance" "public" {
 
   key_name = aws_key_pair.personal.key_name
 
-  vpc_security_group_ids = [aws_security_group.main.id]
+  vpc_security_group_ids = [aws_security_group.public.id]
 
   user_data = file("init.sh")
 

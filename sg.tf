@@ -1,4 +1,4 @@
-resource "aws_security_group" "main" {
+resource "aws_security_group" "public" {
   name   = "my-sg-${var.name}-public"
   vpc_id = aws_vpc.dev.id
   ingress {
@@ -28,7 +28,7 @@ resource "aws_security_group" "main" {
   tags = merge(
     var.common_tags,
     {
-      Name = "sg-${var.name}-bastion-public"
+      Name = "my-sg-${var.name}-public"
     }
   )
 }
@@ -54,7 +54,7 @@ resource "aws_security_group" "private" {
   tags = merge(
     var.common_tags,
     {
-      Name = "sg-${var.name}-private"
+      Name = "my-sg-${var.name}-private"
     }
   )
 }
