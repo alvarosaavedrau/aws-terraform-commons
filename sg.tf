@@ -31,6 +31,8 @@ resource "aws_security_group" "public" {
       Name = "my-sg-${var.name}-public"
     }
   )
+
+  depends_on = [ aws_vpc.dev ]
 }
 
 resource "aws_security_group" "private" {
@@ -42,6 +44,13 @@ resource "aws_security_group" "private" {
     to_port         = 22
     protocol        = "tcp"
     security_groups = [aws_security_group.public.id]
+  }
+
+  ingress {
+    from_port       = var.rds_port
+    to_port         = var.rds_port
+    protocol        = "tcp"
+    security_groups = [ aws_security_group.public.id ]
   }
 
   egress {
@@ -57,4 +66,6 @@ resource "aws_security_group" "private" {
       Name = "my-sg-${var.name}-private"
     }
   )
+
+  depends_on = [ aws_vpc.dev ]
 }
