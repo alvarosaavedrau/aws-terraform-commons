@@ -7,4 +7,6 @@ resource "aws_internet_gateway" "dev" {
       "Name" = "igw-${var.name}",
     }
   )
+
+  depends_on = [ aws_vpc.dev ]
 }

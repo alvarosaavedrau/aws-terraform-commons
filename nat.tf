@@ -19,4 +19,6 @@ resource "aws_nat_gateway" "publicA" {
       Name = "nat-gateway-${var.name}-publicA"
     }
   )
+
+  depends_on = [ aws_subnet.publicA, aws_eip.publicA ]
 }
