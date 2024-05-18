@@ -1,7 +1,7 @@
 resource "aws_db_subnet_group" "rds" {
-  subnet_ids = [ aws_subnet.privateA.id, aws_subnet.privateB.id ]
+  subnet_ids = [aws_subnet.privateA.id, aws_subnet.privateB.id]
 
-  depends_on = [ aws_subnet.privateA, aws_subnet.privateB ]
+  depends_on = [aws_subnet.privateA, aws_subnet.privateB]
 }
 
 resource "aws_rds_cluster" "postgresql" {
@@ -15,12 +15,12 @@ resource "aws_rds_cluster" "postgresql" {
   skip_final_snapshot         = var.rds_skip_final_snapshot
   deletion_protection         = var.rds_deletion_protection
   db_subnet_group_name        = aws_db_subnet_group.rds.id
-  vpc_security_group_ids      = [ aws_security_group.private.id ]
+  vpc_security_group_ids      = [aws_security_group.private.id]
   port                        = var.rds_port
   backup_retention_period     = var.rds_backup_retention_period
   apply_immediately           = true
 
-  depends_on = [ aws_db_subnet_group.rds, aws_security_group.private ]
+  depends_on = [aws_db_subnet_group.rds, aws_security_group.private]
 }
 
 resource "aws_rds_cluster_instance" "postgresql_instance" {
@@ -33,5 +33,5 @@ resource "aws_rds_cluster_instance" "postgresql_instance" {
   monitoring_interval          = var.rds_instance_monitoring_interval
   auto_minor_version_upgrade   = var.rds_instance_minor_version
 
-  depends_on = [ aws_rds_cluster.postgresql ]
+  depends_on = [aws_rds_cluster.postgresql]
 }

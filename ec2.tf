@@ -17,7 +17,7 @@ resource "aws_instance" "public" {
 
   key_name = aws_key_pair.personal.key_name
 
-  vpc_security_group_ids = [ aws_security_group.public.id ]
+  vpc_security_group_ids = [aws_security_group.public.id]
 
   user_data = file("init.sh")
 
@@ -28,7 +28,7 @@ resource "aws_instance" "public" {
     }
   )
 
-  depends_on = [ data.aws_ami.amzn-linux-2023-ami, aws_subnet.publicA, aws_key_pair.personal, aws_security_group.public ]
+  depends_on = [data.aws_ami.amzn-linux-2023-ami, aws_subnet.publicA, aws_key_pair.personal, aws_security_group.public]
 }
 
 resource "aws_instance" "private" {
@@ -38,7 +38,7 @@ resource "aws_instance" "private" {
 
   key_name = aws_key_pair.personal.key_name // should be another key pair, best practices...
 
-  vpc_security_group_ids = [ aws_security_group.private.id ]
+  vpc_security_group_ids = [aws_security_group.private.id]
 
   tags = merge(
     var.common_tags,
@@ -47,6 +47,6 @@ resource "aws_instance" "private" {
     }
   )
 
-  depends_on = [ data.aws_ami.amzn-linux-2023-ami, aws_subnet.privateA, aws_key_pair.personal, aws_security_group.private ]
+  depends_on = [data.aws_ami.amzn-linux-2023-ami, aws_subnet.privateA, aws_key_pair.personal, aws_security_group.private]
 
 }
