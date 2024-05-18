@@ -1,6 +1,3 @@
 #!/bin/bash
 
-yum install -y httpd
-systemctl start httpd
-systemctl enable httpd
-echo "finished" > hello.txt
+dnf install postgresql15.x86_64 -y
