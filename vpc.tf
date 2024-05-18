@@ -24,7 +24,7 @@ resource "aws_subnet" "publicA" {
     }
   )
 
-  depends_on = [aws_vpc.dev]
+  depends_on = [ aws_vpc.dev ]
 }
 
 resource "aws_subnet" "privateA" {
@@ -40,4 +40,21 @@ resource "aws_subnet" "privateA" {
     }
   )
 
+  depends_on = [ aws_vpc.dev ]
+}
+
+resource "aws_subnet" "privateB" {
+  vpc_id                  = aws_vpc.dev.id
+  cidr_block              = "10.0.32.0/20"
+  availability_zone       = "us-east-1b"
+  map_public_ip_on_launch = false
+
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "subnet-${var.name}-privateB"
+    }
+  )
+
+  depends_on = [ aws_vpc.dev ]
 }
