@@ -20,5 +20,5 @@ resource "aws_nat_gateway" "publicA" {
     }
   )
 
-  depends_on = [ aws_subnet.publicA, aws_eip.publicA ]
+  depends_on = [aws_subnet.publicA, aws_eip.publicA]
 }

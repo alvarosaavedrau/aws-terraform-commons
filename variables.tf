@@ -101,6 +101,6 @@ variable "rds_instance_minor_version" {
 }
 
 variable "rds_database_name" {
-  type = string
+  type        = string
   description = "RDS database name"
 }

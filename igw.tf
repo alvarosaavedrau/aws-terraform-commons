@@ -8,5 +8,5 @@ resource "aws_internet_gateway" "dev" {
     }
   )
 
-  depends_on = [ aws_vpc.dev ]
+  depends_on = [aws_vpc.dev]
 }

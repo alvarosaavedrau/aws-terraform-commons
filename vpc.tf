@@ -24,7 +24,7 @@ resource "aws_subnet" "publicA" {
     }
   )
 
-  depends_on = [ aws_vpc.dev ]
+  depends_on = [aws_vpc.dev]
 }
 
 resource "aws_subnet" "privateA" {
@@ -40,7 +40,7 @@ resource "aws_subnet" "privateA" {
     }
   )
 
-  depends_on = [ aws_vpc.dev ]
+  depends_on = [aws_vpc.dev]
 }
 
 resource "aws_subnet" "privateB" {
@@ -56,5 +56,5 @@ resource "aws_subnet" "privateB" {
     }
   )
 
-  depends_on = [ aws_vpc.dev ]
+  depends_on = [aws_vpc.dev]
 }
