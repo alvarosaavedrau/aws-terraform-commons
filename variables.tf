@@ -92,7 +92,7 @@ variable "rds_instance_performance_insights" {
 
 variable "rds_instance_monitoring_interval" {
   type        = string
-  description = "RDS instance monitoring interval"
+  description = "RDS instance monitoring interval, if > 0 enhanced monitoring enabled"
 }
 
 variable "rds_instance_minor_version" {
@@ -108,4 +108,14 @@ variable "rds_database_name" {
 variable "rds_cluster_engine" {
   type        = string
   description = "RDS cluster engine"
+}
+
+variable "rds_cluster_maintenance_window" {
+  type        = string
+  description = "RDS maintenance window"
+}
+
+variable "rds_instance_insights_retention_period" {
+  type        = number
+  description = "RDS instance insights retention period"
 }
