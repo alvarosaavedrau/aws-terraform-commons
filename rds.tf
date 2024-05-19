@@ -61,9 +61,9 @@ resource "aws_rds_cluster_instance" "rds_instance" {
   depends_on = [aws_rds_cluster.rds_cluster, aws_iam_role.rds]
 }
 
-resource "aws_db_instance" "rds_replica_reader" {
+resource "aws_rds_cluster_instance" "rds_replica_reader" {
   identifier                            = "${var.rds_instance_name}-reader-${var.name}"
-  replicate_source_db                   = aws_rds_cluster_instance.rds_instance.identifier
+  cluster_identifier                    = aws_rds_cluster.rds_cluster.id
   instance_class                        = var.rds_instance_type
   engine                                = aws_rds_cluster.rds_cluster.engine
   engine_version                        = aws_rds_cluster.rds_cluster.engine_version
@@ -80,8 +80,7 @@ resource "aws_db_instance" "rds_replica_reader" {
     }
   )
 
-  depends_on = [aws_rds_cluster.rds_cluster, aws_rds_cluster_instance.rds_instance, aws_iam_role.rds]
-
+  depends_on = [aws_rds_cluster.rds_cluster, aws_iam_role.rds]
 }
 
 resource "aws_iam_role" "rds" {
