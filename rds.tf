@@ -4,11 +4,11 @@ resource "aws_db_subnet_group" "rds" {
   depends_on = [aws_subnet.privateA, aws_subnet.privateB]
 }
 
-resource "aws_rds_cluster" "postgresql" {
+resource "aws_rds_cluster" "rds_cluster" {
   cluster_identifier          = var.rds_cluster_name
   database_name               = var.rds_database_name
-  engine                      = "aurora-postgresql"
-  engine_version              = var.rds_postgre_version
+  engine                      = var.rds_cluster_engine
+  engine_version              = var.rds_cluster_version
   storage_encrypted           = var.rds_storage_encrypted
   master_username             = var.rds_username
   manage_master_user_password = true
@@ -23,15 +23,15 @@ resource "aws_rds_cluster" "postgresql" {
   depends_on = [aws_db_subnet_group.rds, aws_security_group.private]
 }
 
-resource "aws_rds_cluster_instance" "postgresql_instance" {
+resource "aws_rds_cluster_instance" "rds_instance" {
   identifier                   = var.rds_instance_name
-  cluster_identifier           = aws_rds_cluster.postgresql.id
+  cluster_identifier           = aws_rds_cluster.rds_cluster.id
   instance_class               = var.rds_instance_type
-  engine                       = aws_rds_cluster.postgresql.engine
-  engine_version               = aws_rds_cluster.postgresql.engine_version
+  engine                       = aws_rds_cluster.rds_cluster.engine
+  engine_version               = aws_rds_cluster.rds_cluster.engine_version
   performance_insights_enabled = var.rds_instance_performance_insights
   monitoring_interval          = var.rds_instance_monitoring_interval
   auto_minor_version_upgrade   = var.rds_instance_minor_version
 
-  depends_on = [aws_rds_cluster.postgresql]
+  depends_on = [aws_rds_cluster.rds_cluster]
 }

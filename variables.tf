@@ -45,7 +45,7 @@ variable "rds_username" {
   description = "Username to connect to RDS"
 }
 
-variable "rds_postgre_version" {
+variable "rds_cluster_version" {
   type        = string
   description = "Postgre version to use"
 }
@@ -103,4 +103,9 @@ variable "rds_instance_minor_version" {
 variable "rds_database_name" {
   type        = string
   description = "RDS database name"
+}
+
+variable "rds_cluster_engine" {
+  type        = string
+  description = "RDS cluster engine"
 }
