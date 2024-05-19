@@ -8,4 +8,5 @@ This architecture is an example from [Stephane Maarek](https://pt.linkedin.com/i
 
 ## TO-DO
 
-- [ ] Add RDS to diagram architecture
+- [ ] Add RDS to diagram architecture.
+- [ ] Add second private subnet to diagram architecture.
