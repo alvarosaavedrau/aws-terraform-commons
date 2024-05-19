@@ -11,3 +11,7 @@ data "aws_ami" "amzn-linux-2023-ami" {
 data "http" "myip" {
   url = "https://ipv4.icanhazip.com"
 }
+
+data "aws_iam_policy" "AmazonRDSEnhancedMonitoringRole" {
+  name = "AmazonRDSEnhancedMonitoringRole"
+}
