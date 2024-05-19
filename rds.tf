@@ -80,7 +80,7 @@ resource "aws_db_instance" "rds_replica_reader" {
     }
   )
 
-  depends_on = [aws_rds_cluster.rds_cluster, rds_instance.aws_rds_cluster_instance, aws_iam_role.rds]
+  depends_on = [aws_rds_cluster.rds_cluster, aws_rds_cluster_instance.rds_instance, aws_iam_role.rds]
 
 }
 
