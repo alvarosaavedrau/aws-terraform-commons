@@ -40,7 +40,7 @@ resource "aws_rds_cluster" "rds_cluster" {
 }
 
 resource "aws_rds_cluster_instance" "rds_instance" {
-  identifier                            = "${var.rds_instance_name}-${var.name}"
+  identifier                            = "${var.rds_instance_name}-writer-${var.name}"
   cluster_identifier                    = aws_rds_cluster.rds_cluster.id
   instance_class                        = var.rds_instance_type
   engine                                = aws_rds_cluster.rds_cluster.engine
@@ -54,11 +54,34 @@ resource "aws_rds_cluster_instance" "rds_instance" {
   tags = merge(
     var.common_tags,
     {
-      Name = "${var.rds_instance_name}-${var.name}"
+      Name = "${var.rds_instance_name}-writer-${var.name}"
     }
   )
 
-  depends_on = [aws_rds_cluster.rds_cluster]
+  depends_on = [aws_rds_cluster.rds_cluster, aws_iam_role.rds]
+}
+
+resource "aws_db_instance" "rds_replica_reader" {
+  identifier                            = "${var.rds_instance_name}-reader-${var.name}"
+  replicate_source_db                   = aws_rds_cluster_instance.rds_instance.identifier
+  instance_class                        = var.rds_instance_type
+  engine                                = aws_rds_cluster.rds_cluster.engine
+  engine_version                        = aws_rds_cluster.rds_cluster.engine_version
+  performance_insights_enabled          = var.rds_instance_performance_insights
+  performance_insights_retention_period = var.rds_instance_insights_retention_period
+  monitoring_interval                   = var.rds_instance_monitoring_interval
+  monitoring_role_arn                   = aws_iam_role.rds.arn
+  auto_minor_version_upgrade            = var.rds_instance_minor_version
+
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "${var.rds_instance_name}-reader-${var.name}"
+    }
+  )
+
+  depends_on = [aws_rds_cluster.rds_cluster, rds_instance.aws_rds_cluster_instance, aws_iam_role.rds]
+
 }
 
 resource "aws_iam_role" "rds" {
