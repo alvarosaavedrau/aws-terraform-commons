@@ -20,3 +20,7 @@ output "rds_cluster_database_name" {
 output "aws_rds_cluster_instance" {
   value = aws_rds_cluster_instance.rds_instance.endpoint
 }
+
+output "aws_rds_cluster_username" {
+  value = aws_rds_cluster.rds_cluster.master_username
+}
