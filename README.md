@@ -10,3 +10,4 @@ This architecture is an example from [Stephane Maarek](https://pt.linkedin.com/i
 
 - [x] Add RDS to diagram architecture.
 - [x] Add second private subnet to diagram architecture.
+- [ ] Add output to the RDS reader instance.
